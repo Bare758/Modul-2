@@ -1,15 +1,17 @@
-var global = "Global";
+const global = "Global";
 
 (function () {
-  const x = () => {
-    var notGlobal = "Not Global";
-    document.getElementById("id1").innerHTML =
-      typeof notGlobal + " " + notGlobal;
-  };
-  x();
-  document.getElementById("id2").innerHTML = typeof global + " " + global;
+  document.querySelector("#btn1").addEventListener("click", () => {
+    const notGlobalFunction = () => {
+      const notGlobal = "Not Global";
+      document.getElementById("id1").innerHTML =
+        typeof notGlobal + " " + notGlobal;
+    };
+    notGlobalFunction();
+    document.getElementById("id2").innerHTML = typeof global + " " + global;
 
-  document.getElementById("id3").innerHTML = typeof notGlobal;
+    document.getElementById("id3").innerHTML = typeof notGlobal;
+  });
 
   const event = new CustomEvent("change-color", {
     detail: { details: { color: "red", string1: "Animal" } },
@@ -31,7 +33,12 @@ var global = "Global";
 
   let full = true;
 
-  full && (document.querySelector("#id5").innerHTML = "full is true");
+  document.querySelector("#btn5").addEventListener("click", () => {
+    full && (document.querySelector("#id5").innerHTML = "&& is true");
+  });
 
-  document.dispatchEvent(event);
+  document.querySelector("#btn4").addEventListener("click", () => {
+    document.dispatchEvent(event);
+  });
 })();
+
